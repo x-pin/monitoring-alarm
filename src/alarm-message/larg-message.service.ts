@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
 class MonitoringDto {
-  readonly type: string
+  readonly target: string
   content: string | Record<string, any>
-  readonly isAt: boolean
+  readonly at: string
 }
 /**
-  * 告警消息
+  * larg 告警消息
   * Unicode Emoji 官方网站: https://unicode.org/emoji/charts/，用于丰富表情
   * Hello 😊 这是一条带表情的消息 🚀 ❤️ 😋 ❤ 🍳 ❌ ❎ 💚 💯 🌹💩🏃‍♂️🐦‍🔥🦚🌲🌿📈📉
   */
 @Injectable()
-export class AlarmMessageService {
+export class LargMessageService {
   constructor(
     private readonly httpService: HttpService,
   ) {}
@@ -24,7 +24,7 @@ export class AlarmMessageService {
    */
   send(info: MonitoringDto, type: 'larg' | 'feiShu' = 'larg') {
     if (type === 'larg') {
-      this.sendFeiShuMessage(info);
+      this.sendLargMessage(info);
     } else if (type === 'feiShu') {
       this.sendFeiShuMessage(info);
     }
@@ -35,14 +35,22 @@ export class AlarmMessageService {
    * @param info
    * 飞书机器人接口: https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot#4996824a
    */
-  async sendFeiShuMessage(info: MonitoringDto) {
-    const {content, type, isAt } = info;
+  async sendLargMessage(info: MonitoringDto) {
+    const {content, target, at } = info;
     let key = ''
 
-    switch (type) {
-      // 订单提醒
-      case 'order':
+    switch (target) {
+      // 老板机器人id
+      case 'boss':
         key = 'f0f5c0c5-c0c5-4c0c-5c0c-5c0c5c0c5c0c'
+        break;
+      // 开发机器人id
+      case 'development':
+        key = 'f0f5c0c5-c0c5-4c0c-5c0c-5c0c5c0c5c0e'
+        break;
+      // 运营机器人id
+      case 'operation':
+        key = 'f0f5c0c5-c0c5-4c0c-5c0c-5c0c5c0c5c0f'
         break;
       default:
         break;
@@ -55,10 +63,20 @@ export class AlarmMessageService {
       msgtype: 'text',
       text: {
         content: content,
-        "mentioned_list":[ isAt ? "@all" : '']
+        "mentioned_list":[ at ? "@all" : '']
       }
     }
     // 发送消息
     this.httpService.post(url, data).subscribe(() => {})
+  }
+
+  /**
+   * 发送飞书群消息
+   * @param info
+   * 飞书机器人接口: https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL5ZmN24iN5-zN5qjL5ZmM
+   */
+  sendFeiShuMessage(info: MonitoringDto) {
+    const {content, target, at } = info;
+    console.log(content)
   }
 }

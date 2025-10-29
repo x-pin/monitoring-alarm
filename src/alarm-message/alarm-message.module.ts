@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AlarmMessageService } from './alarm-message.service';
 import { HttpModule } from '@nestjs/axios'
-import { RabbitMqService } from './rabbit-mq.service'
-import { RedisMqService } from './redis-mq.service';
+import { RabbmitRedisMqService } from './rabbimt-redis-mq.service';
+import { LargMessageService } from './larg-message.service';
+
 
 /**
  * 告警消息推送
@@ -10,11 +10,10 @@ import { RedisMqService } from './redis-mq.service';
 @Module({
   imports: [HttpModule],
   providers: [
-    RabbitMqService,
-    RedisMqService,
-    AlarmMessageService
+    RabbmitRedisMqService,
+    LargMessageService
   ],
-  exports: [AlarmMessageService],
+  exports: [RabbmitRedisMqService],
 })
 export class AlarmMessageModule {
   
