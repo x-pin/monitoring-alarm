@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios'
 import { RabbmitRedisMqService } from './rabbimt-redis-mq.service';
 import { LargMessageService } from './larg-message.service';
+import { AlarmMessageController } from './alarm-message.controller';
 
 
 /**
@@ -13,6 +14,7 @@ import { LargMessageService } from './larg-message.service';
     RabbmitRedisMqService,
     LargMessageService
   ],
+  controllers: [AlarmMessageController],
   exports: [RabbmitRedisMqService],
 })
 export class AlarmMessageModule {

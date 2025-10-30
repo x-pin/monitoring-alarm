@@ -13,6 +13,6 @@ export class ScheduleTaskService {
   async handleCron() {
     console.log('每15分钟执行一次');
     // 发送告警消息
-    // await this.rabbmitRedisMqService.dispatch('');
+    await this.rabbmitRedisMqService.dispatch('{"type":"larg","data":{"message":"xpin-余额消息","target":"balanceAlarm"}}');
   }
 }

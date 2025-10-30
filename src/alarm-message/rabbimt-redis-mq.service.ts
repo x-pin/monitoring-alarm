@@ -50,7 +50,7 @@ export class RabbmitRedisMqService {
   async dispatch(context: string) {
     let messageType:string = ''
     try {
-      const mqMessage = plainToClass(MqMessage, context);
+      const mqMessage = JSON.parse(context);
       messageType = mqMessage.type
       switch (mqMessage.type) {
         case 'larg':
@@ -63,12 +63,9 @@ export class RabbmitRedisMqService {
     }
   }
 
-  async largMessage(message: string) {
-    await this.largMessageService.send({
-      target: 'error',
-      content: 'dddd',
-      at: '',
-    });
+  async largMessage(data:any) {
+    console.log('largMessage', data);
+    await this.largMessageService.send(data, 'larg');
   }
 }
     

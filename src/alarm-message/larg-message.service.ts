@@ -3,7 +3,7 @@ import { HttpService } from '@nestjs/axios';
 
 class MonitoringDto {
   readonly target: string
-  content: string | Record<string, any>
+  message: string | Record<string, any>
   readonly at: string
 }
 /**
@@ -23,6 +23,8 @@ export class LargMessageService {
    * @param type 接收消息平台
    */
   send(info: MonitoringDto, type: 'larg' | 'feiShu' = 'larg') {
+    console.log('info', info);
+    console.log('type', type);
     if (type === 'larg') {
       this.sendLargMessage(info);
     } else if (type === 'feiShu') {
@@ -36,13 +38,13 @@ export class LargMessageService {
    * 飞书机器人接口: https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot#4996824a
    */
   async sendLargMessage(info: MonitoringDto) {
-    const {content, target, at } = info;
+    const {message, target } = info;
     let key = ''
-
+    console.log('info-sendLargMessage', info);
     switch (target) {
       // 老板机器人id
-      case 'boss':
-        key = 'f0f5c0c5-c0c5-4c0c-5c0c-5c0c5c0c5c0c'
+      case 'balanceAlarm':
+        key = 'e979fe83-3ca3-4a57-acc5-b1027ad79568'
         break;
       // 开发机器人id
       case 'development':
@@ -58,14 +60,15 @@ export class LargMessageService {
 
     if (!key) return;
 
-    const url = `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${key}`;
+    const url = `https://open.larksuite.com/open-apis/bot/v2/hook/${key}`;
     const data = {
-      msgtype: 'text',
-      text: {
-        content: content,
-        "mentioned_list":[ at ? "@all" : '']
+      "msg_type": "text",
+      "content": {
+          "text": message,
       }
     }
+    console.log('data', data);
+    console.log('url', url);
     // 发送消息
     this.httpService.post(url, data).subscribe(() => {})
   }
@@ -76,7 +79,7 @@ export class LargMessageService {
    * 飞书机器人接口: https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL5ZmN24iN5-zN5qjL5ZmM
    */
   sendFeiShuMessage(info: MonitoringDto) {
-    const {content, target, at } = info;
-    console.log(content)
+    const {message, target, at } = info;
+    console.log(message)
   }
 }
