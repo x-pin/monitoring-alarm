@@ -12,6 +12,7 @@ lerna-debug.log*
 
 # 配置文件
 dev.yml
+config/config.local.js
 
 # OS
 .DS_Store

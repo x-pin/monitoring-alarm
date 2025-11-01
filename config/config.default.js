@@ -5,11 +5,11 @@ module.exports = {
   name: packageJson.name,
   rootDir: path.join(__dirname, '../'),
   mysql: {
-    host: '106.14.13.242',
+    host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: 'Yxf@wn775210end',
-    database: 'kapok', // 一般root才有访问此数据库权限
+    password: 'xxxx',
+    database: 'xxxx', // 一般root才有访问此数据库权限
     pool: 100,
     timeout: 60000,
     charset: 'utf8mb4',
@@ -38,9 +38,9 @@ module.exports = {
     showSql: true // 使用BaseModel的才有效，打印sql
   },
   redis: {
-    host: '106.14.117.241',
+    host: '127.0.0.1',
     port: 6389,
-    auth: 'DD@dd775210allDay',
+    auth: 'ffffff',
     db: 1
   },
 
