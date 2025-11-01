@@ -14,7 +14,7 @@ module.exports = {
     walletAddress: '0x982AE9c4F166646B0896F25357C26b9F013F1b99',
     // bsc链信息配置
     bscConfig: {
-      chainName: 'b s c',
+      chainName: 'BSC',
       tokenAddress: '0xD955c9bA56Fb1AB30e34766e252A97ccCE3D31A6',
       rpcProviders: [
         'https://bnb.rpc.subquery.network/public'

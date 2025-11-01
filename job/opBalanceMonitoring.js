@@ -26,16 +26,15 @@ async function start_test() {
   )
   
   try {
-    const title = `💰钱包:${alarmBalanceGroup.walletAddress}`
+    const title = `💰钱包后6位:${alarmBalanceGroup.walletAddress.slice(-6)}`
     // ❌、✅、⚠
-    const balanceBNBStatus = bscRes.balanceBNB < 5 ? '⚠' : '✅'
-    const balanceBNBTokenStatus = bscRes.balanceToken < 2000000 ? '⚠' : '✅'
-    const balanceLoTexStatus = bscRes.balanceBNB < 5000 ? '⚠' : '✅'
-    const balanceLoTexTokenStatus = bscRes.balanceToken < 5000000 ? '⚠' : '✅'
+    const balanceBNBStatus = bscRes.balanceBNB < 5 ? '❌' : '✅'
+    const balanceBNBTokenStatus = bscRes.balanceToken < 2000000 ? '❌' : '✅'
+    const balanceLoTexStatus = bscRes.balanceBNB < 5000 ? '❌' : '✅'
+    const balanceLoTexTokenStatus = bscRes.balanceToken < 5000000 ? '❌' : '✅'
 
-
-    let message = `**${alarmBalanceGroup.bscConfig.chainName}链:**本币余额【${bscRes.balanceBNB.toLocaleString()}】${balanceBNBStatus},  Token 余额【${bscRes.balanceToken.toLocaleString()}】${balanceBNBTokenStatus}\n`
-        message += `**${alarmBalanceGroup.loTexConfig.chainName}链:**本币余额【${loTexRes.balanceBNB.toLocaleString()}】${balanceLoTexStatus},  Token 余额【${loTexRes.balanceToken.toLocaleString()}】${balanceLoTexTokenStatus}`
+    let message = `**${alarmBalanceGroup.bscConfig.chainName}链:**\n${balanceBNBStatus} 本币余额【${bscRes.balanceBNB.toLocaleString()}】\n${balanceBNBTokenStatus} Token 余额【${bscRes.balanceToken.toLocaleString()}】\n`
+        message += `**${alarmBalanceGroup.loTexConfig.chainName}链:**\n${balanceLoTexStatus} 本币余额【${loTexRes.balanceBNB.toLocaleString()}】\n${balanceLoTexTokenStatus} Token 余额【${loTexRes.balanceToken.toLocaleString()}】`
 
     await axios.post(
       'https://open.larksuite.com/open-apis/bot/v2/hook/1e3af47e-6ffe-4f57-a866-08bc765b4518',
