@@ -1,4 +1,3 @@
-const schedule = require('node-schedule');
 const axios = require('axios');
 const {alarmBalanceGroup} = require('../config')
 const chainBalance = require("../lib/chainBalance");
@@ -11,7 +10,7 @@ const larkMsgTypes = require('../tool/larkMsgTypes');
  * Hello 😊 这是一条带表情的消息 🚀 ❤️ 😋 ❤ 🍳 ❌ ❎ 💚 💯 🌹💩🏃‍♂️🐦‍🔥🦚🌲🌿📈📉
  * 飞书机器人接口: https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot#4996824a
  */
-async function start_test() {
+async function opBanceMonitoring() {
   const bscRes = await chainBalance.run(
     alarmBalanceGroup.bscConfig.chainName,
     alarmBalanceGroup.bscConfig.rpcProviders[0], 
@@ -47,4 +46,4 @@ async function start_test() {
   }
 }
 
-start_test()
+module.exports = opBanceMonitoring;
