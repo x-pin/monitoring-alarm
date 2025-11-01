@@ -4,12 +4,35 @@ const packageJson = require('../package')
 module.exports = {
   name: packageJson.name,
   rootDir: path.join(__dirname, '../'),
+  /**
+   * OP 账号本币与token 监控值班群（双链）
+   */
+  alarmBalanceGroup: {
+    // 群机器人webHook
+    robotUrl: 'https://open.larksuite.com/open-apis/bot/v2/hook/1e3af47e-6ffe-4f57-a866-08bc765b4518',
+    // 钱包地址
+    walletAddress: '0x982AE9c4F166646B0896F25357C26b9F013F1b99',
+    // bsc链信息配置
+    bscConfig: {
+      tokenAddress: '0xD955c9bA56Fb1AB30e34766e252A97ccCE3D31A6',
+      rpcProviders: [
+        'https://bnb.rpc.subquery.network/public'
+      ]
+    },
+    // loTex信息配置
+    loTexConfig: {
+      tokenAddress: '0x7a275c27da6e2ff68742b5d17d11edab407f9327',
+      rpcProviders: [
+        'https://babel-api.fastblocks.io'
+      ]
+    },
+  },
   mysql: {
-    host: '127.0.0.1',
+    host: '106.14.13.242',
     port: 3306,
     user: 'root',
-    password: 'xxxx',
-    database: 'xxxx', // 一般root才有访问此数据库权限
+    password: 'Yxf@wn775210end',
+    database: 'kapok', // 一般root才有访问此数据库权限
     pool: 100,
     timeout: 60000,
     charset: 'utf8mb4',
@@ -38,9 +61,9 @@ module.exports = {
     showSql: true // 使用BaseModel的才有效，打印sql
   },
   redis: {
-    host: '127.0.0.1',
+    host: '106.14.117.241',
     port: 6389,
-    auth: 'ffffff',
+    auth: 'DD@dd775210allDay',
     db: 1
   },
 
@@ -91,37 +114,4 @@ module.exports = {
     'limit',
     'sky-api-register'
   ]
-
-  /* 这段打开后，属性会冲掉原来skybase配置，否则使用默认skybase
-    // openssl genrsa -out key.pem
-    // openssl req -new -key key.pem -out csr.pem
-    // openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem 最后可以删除 csr
-
-   https: {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem'),
-    rejectUnauthorized: false
-  },
-  name: packageJson.name,
-  tokenName: packageJson.name,
-  rootDir: path.dirname(process.mainModule.filename),
-  apiDir: './model/api',
-  routerDir: './router',
-  serviceDir: '',
-  logger: true,
-  middlewareDir: './middleware',
-  staticDir: './www',
-  bodyParse: {
-    multipart: !0,
-    formLimit: '100mb', // 100M 文件上传限制
-    jsonLimit: '2mb', // body中json格式大小限制
-    textLimit: '2mb', //
-    extendTypes: {
-      custom: [
-        'text/xml'
-      ]
-    }
-  }
-
-  */
 }
