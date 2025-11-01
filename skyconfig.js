@@ -4,12 +4,12 @@ module.exports = {
   /**
    * 项目名称，启动时，会以3D字体的形式在控制台打印
    * */
-  name: 'sky-demo',
+  name: 'xpin-alarm-message',
 
   /**
    * token 保存key值
    * */
-  tokenName: 'sky-demo',
+  tokenName: 'xpin-alarm-message',
 
   /**
    * 入口文件的路径
@@ -110,5 +110,5 @@ module.exports = {
       custom: ['text/xml']
     }
   },
-  rtsQueueName: 'sky-demo_rts'
+  rtsQueueName: 'xpin-alarm-message_rts'
 }
